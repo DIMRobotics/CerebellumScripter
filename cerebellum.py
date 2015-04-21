@@ -6,7 +6,7 @@ context = zmq.Context()
 socket = context.socket(zmq.REQ)
 
 # Set "True" in your script to setup debugging output
-DEBUG = False
+DEBUG = True
 
 # Robot configuration constants
 
@@ -117,10 +117,10 @@ def sensor_get(index):
 
 
 def bsensor_get(index):
-    socket.send_multipart(["get", "bsensor", ""])
+    socket.send_multipart(["get", "bsensor", pack("!I", index)])
     reply = socket.recv_multipart()
-    data = unpack("!I", reply[1])
-    if data[0] & index:
+    data = unpack("!B", reply[0])
+    if data[0]:
         return True
     else:
         return False

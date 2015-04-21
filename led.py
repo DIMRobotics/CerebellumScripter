@@ -2,11 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import cerebellum as c
+from sys import argv
 from time import sleep
 c.DEBUG = True
 
-#c.connect("tcp://localhost:1234")
-c.connect("tcp://192.168.1.130:1234")
+if len(argv) <= 1:
+    addr = "localhost"
+else:
+    addr = argv[1]
+
+c.connect("tcp://" + addr + ":1234")
 
 pwm_cycle = 0.003
 duty = 0
