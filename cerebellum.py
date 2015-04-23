@@ -4,6 +4,7 @@ from struct import pack, unpack
 
 context = zmq.Context()
 socket = context.socket(zmq.REQ)
+socket.RCVTIMEO = 1000
 
 # Set "True" in your script to setup debugging output
 DEBUG = True
